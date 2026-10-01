@@ -8,11 +8,14 @@ namespace Empleados.Classes
     public class Vendedor : Empleado
     {
         // Uso de internal para aplicar encapsulamiento
-        internal Vendedor(string nombre, int dni, double sueldo_base) : base(nombre, dni, sueldo_base) { }
-        // Función derivada con otro factor de comisión
-        public override void sumarSueldoAdicional(int factor)
+        internal Vendedor(string nombre, int dni, double sueldo_base, int factor) : base(nombre, dni, sueldo_base, factor)
         {
-            Sueldo_base += factor * 1.4f;
+            tipo = "Vendedor";
+        }
+        // Función derivada con otro factor de comisión
+        public override double sumarSueldoAdicional()
+        {
+            return Sueldo_base + (Factor * 1.4f);
         }
     }
 }

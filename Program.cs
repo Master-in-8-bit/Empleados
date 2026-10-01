@@ -12,10 +12,9 @@ namespace Empleados
                 Console.WriteLine();
                 Console.WriteLine("Qué desea hacer?");
                 Console.WriteLine("\t1 - Agregar empleados");
-                Console.WriteLine("\t2 - Modificar empleado");
-                Console.WriteLine("\t3 - Eliminar empleado");
-                Console.WriteLine("\t4 - Mostrar sueldos adicionales");
-                Console.WriteLine("\t5 - Salir");
+                Console.WriteLine("\t2 - Mostrar sueldos adicionales");
+                Console.WriteLine("\t3 - Reiniciar la tabla de empleados");
+                Console.WriteLine("\t4 - Salir");
                 Console.Write("? = ");
                 int op = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
@@ -23,12 +22,18 @@ namespace Empleados
                 {
                     case 1:
                         Ingresar();
+                        Console.WriteLine("Empleado agregado con éxito, para seguir con la lista de opciones, presione cualquier tecla");
+                        Console.ReadLine();
                         break;
                     case 2:
                         Calcular();
+                        Console.WriteLine("Para seguir con la lista de opciones, presione cualquier tecla");
+                        Console.ReadLine();
                         break;
                     case 3:
                         Reiniciar();
+                        Console.WriteLine("Lista de empleados reiniciada, para seguir con la lista de opciones, presione cualquier tecla");
+                        Console.ReadLine();
                         break;
                     case 4:
                         notexit = false;
@@ -49,6 +54,7 @@ namespace Empleados
             int op;
             bool tipo;
             double sueldo_base;
+            int factor;
             Console.WriteLine("Ingrese el nombre del empleado");
             nombre = Console.ReadLine();
             Console.WriteLine("Ingrese el DNI del empleado");
@@ -63,25 +69,28 @@ namespace Empleados
             } while (op != 1 && op != 2);
             Console.WriteLine("Ingrese el sueldo base del empleado");
             sueldo_base = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Ingrese el factor de sueldo agregado");
+            factor = Convert.ToInt32(Console.ReadLine());
             if (tipo)
             {
-                listaEmpleados.Add(new Vendedor(nombre, dni, sueldo_base));
+                listaEmpleados.Add(new Vendedor(nombre, dni, sueldo_base, factor));
             }
             else
             {
-                listaEmpleados.Add(new Directivo(nombre, dni, sueldo_base));
+                listaEmpleados.Add(new Directivo(nombre, dni, sueldo_base, factor));
             }
         }
         static void Calcular()
         {
+            Console.WriteLine("Nombre\t\t| DNI\t\t| Tipo\t\t| Sueldo base\t| Factor | Sueldo total");
             foreach (var empleado in listaEmpleados)
             {
-                empleado.sumarSueldoAdicional()
+                Console.WriteLine($"{empleado.Nombre}\t\t| {empleado.DNI}\t| {empleado.tipo}\t| {empleado.Sueldo_base}\t\t| {empleado.Factor}\t | {empleado.sumarSueldoAdicional()}");
             }
         }
         static void Reiniciar()
         {
-
+            listaEmpleados.Clear();
         }
     }
 }

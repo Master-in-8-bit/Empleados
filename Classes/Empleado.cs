@@ -4,22 +4,26 @@ using System.Text;
 
 namespace Empleados.Classes
 {
-    // Clase base
+    // Clase padre
     public class Empleado
     {
         // Uso de internal para aplicar encapsulamiento
         internal string Nombre { get; set; }
         internal int DNI {  get; set; }
         internal double Sueldo_base { get; set; }
-        internal Empleado(string nombre, int dni, double sueldo_base) {
+        internal int Factor { get; set; }
+        internal string tipo = "Empleado";
+        internal Empleado(string nombre, int dni, double sueldo_base, int factor)
+        {
             Nombre = nombre;
             DNI = dni;
             Sueldo_base = sueldo_base;
+            Factor = factor;
         }
         // Función base para aplicar poliformismo
-        public virtual void sumarSueldoAdicional(int factor)
+        public virtual double sumarSueldoAdicional()
         {
-            Sueldo_base += factor * 1;
+            return Sueldo_base + (Factor * 1);
         }
     }
 }
